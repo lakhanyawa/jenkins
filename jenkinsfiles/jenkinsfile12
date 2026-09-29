@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = 'nginx'
+        VERSION = '1.27'
+        ENV_NAME = 'dev'
+    }
+
+    stages {
+        stage('Info') {
+            steps {
+                echo "Application: ${APP_NAME}"
+                echo "Version: ${VERSION}"
+                echo "Environment: ${ENV_NAME}"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building ${APP_NAME}:${VERSION}"
+            }
+        }
+    }
+}

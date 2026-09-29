@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Application Info') {
+            steps {
+                script {
+                    def appName = "nginx"
+                    def version = "1.27"
+
+                    echo "Application: ${appName}"
+                    echo "Version: ${version}"
+                }
+            }
+        }
+    }
+}

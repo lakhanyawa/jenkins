@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    environment {
+        ENV_NAME = 'qa'
+    }
+
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+
+                    if (ENV_NAME == "prod") {
+
+                        echo "Deploying Production"
+
+                    } else if (ENV_NAME == "qa") {
+
+                        echo "Deploying QA"
+
+                    } else if (ENV_NAME == "dev") {
+
+                        echo "Deploying Development"
+
+                    } else {
+
+                        echo "Unknown Environment"
+
+                    }
+                }
+            }
+        }
+    }
+}

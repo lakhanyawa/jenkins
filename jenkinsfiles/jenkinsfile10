@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Deployment Info') {
+            steps {
+
+                script {
+
+                    def application = "nginx"
+                    def environment = "dev"
+
+                    echo "Application: ${application}"
+                    echo "Environment: ${environment}"
+
+                }
+            }
+        }
+    }
+}

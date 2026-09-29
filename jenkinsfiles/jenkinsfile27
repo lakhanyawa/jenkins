@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Show Selection') {
+            steps {
+                echo "Selected Environment: ${params.ENVIRONMENT}"
+            }
+        }
+
+    }
+}

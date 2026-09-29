@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check System') {
+            steps {
+                sh '''
+                    echo "Checking System"
+                    hostname
+                    whoami
+                    pwd
+                    date
+                '''
+            }
+        }
+    }
+}

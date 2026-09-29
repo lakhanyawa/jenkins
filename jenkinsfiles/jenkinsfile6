@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Workspace Info') {
+            steps {
+                echo 'Current Workspace'
+                sh 'pwd'
+
+                echo 'Workspace Files'
+                sh 'ls -la'
+            }
+        }
+
+        stage('Create Artifact') {
+            steps {
+                sh 'mkdir -p output'
+                sh 'echo "Version 1.0" > output/version.txt'
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                sh 'ls -la output'
+                sh 'cat output/version.txt'
+            }
+        }
+    }
+}

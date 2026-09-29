@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Create File') {
+            steps {
+                sh 'echo "Hello Jenkins" > demo.txt'
+            }
+        }
+
+        stage('Read File') {
+            steps {
+                sh 'cat demo.txt'
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'qa', 'prod'],
+            description: 'Select Environment'
+        )
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building Application"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing Application"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+
+                    if (params.ENVIRONMENT == "prod") {
+
+                        echo "Production Deployment"
+
+                    } else if (params.ENVIRONMENT == "qa") {
+
+                        echo "QA Deployment"
+
+                    } else {
+
+                        echo "Development Deployment"
+
+                    }
+                }
+            }
+        }
+    }
+}

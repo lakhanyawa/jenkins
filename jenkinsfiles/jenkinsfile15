@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+
+                    def environment = "prod"
+                    def approved = true
+
+                    if (environment == "prod" && approved) {
+                        echo "Production deployment allowed"
+                    } else {
+                        echo "Deployment not allowed"
+                    }
+
+                }
+            }
+        }
+    }
+}

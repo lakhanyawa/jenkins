@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    environment {
+        ENV_NAME = 'dev'
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building Application"
+            }
+        }
+
+        stage('Production Deploy') {
+
+            when {
+                environment name: 'ENV_NAME', value: 'prod'
+            }
+
+            steps {
+                echo "Deploying Production"
+            }
+        }
+    }
+}

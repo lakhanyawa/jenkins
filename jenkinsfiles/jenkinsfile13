@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    environment {
+        ENV_NAME = 'prod'
+    }
+
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+
+                    if (ENV_NAME == "prod") {
+                        echo "Production Deployment"
+                    } else {
+                        echo "Non-Production Deployment"
+                    }
+
+                }
+            }
+        }
+    }
+}

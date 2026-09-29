@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Deploy Servers') {
+            steps {
+
+                script {
+
+                    def servers = [
+                        "web01",
+                        "web02",
+                        "web03"
+                    ]
+
+                    for (server in servers) {
+
+                        echo "Deploying to ${server}"
+
+                    }
+                }
+            }
+        }
+    }
+}
