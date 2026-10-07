@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Remote Server') {
+            steps {
+
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'server-ssh',
+                        usernameVariable: 'SSH_USER',
+                        keyFileVariable: 'SSH_KEY'
+                    )
+                ]) {
+
+                    sh '''
+                        echo "Connecting as $SSH_USER"
+
+                        ssh \
+                          -i "$SSH_KEY" \
+                          "$SSH_USER@10.12.63.57" \
+                          hostname
+                    '''
+                }
+            }
+        }
+    }
+}
