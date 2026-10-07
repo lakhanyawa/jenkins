@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Application'
+                echo 'running poll scm'
             }
         }
 
