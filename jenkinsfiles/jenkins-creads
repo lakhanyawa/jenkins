@@ -1,0 +1,103 @@
+pipeline {
+
+    agent any
+
+    environment {
+
+        // Username + Password credential
+        GITHUB_CREDS = credentials('github-cred')
+
+        // Secret Text credential
+        API_TOKEN = credentials('api-token')
+
+        // Secret File credential
+        CONFIG_FILE = credentials('secret-config-file')
+    }
+
+    stages {
+
+        stage('Username Password') {
+            steps {
+
+                echo "Testing Username/Password Credential"
+
+                sh '''
+                    echo "Username is: $GITHUB_CREDS_USR"
+
+                    echo "Password is available securely"
+                '''
+            }
+        }
+
+        stage('Secret Text') {
+            steps {
+
+                echo "Testing Secret Text"
+
+                sh '''
+                    echo "API token is available"
+
+                    # Example:
+                    # curl -H "Authorization: Bearer $API_TOKEN" \
+                    #      https://example.com/api
+                '''
+            }
+        }
+
+        stage('Secret File') {
+            steps {
+
+                echo "Testing Secret File"
+
+                sh '''
+                    echo "Secret file location:"
+                    echo "$CONFIG_FILE"
+
+                    test -f "$CONFIG_FILE"
+                '''
+            }
+        }
+
+        stage('SSH Credential') {
+            steps {
+
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'linux-ssh-key',
+                        keyFileVariable: 'SSH_KEY',
+                        usernameVariable: 'SSH_USER'
+                    )
+                ]) {
+
+                    sh '''
+                        echo "SSH Username: $SSH_USER"
+                        echo "SSH private key is available at a temporary secure location"
+
+                        # Real example:
+                        # ssh -i "$SSH_KEY" \
+                        #     -o StrictHostKeyChecking=no \
+                        #     "$SSH_USER@10.10.10.10" \
+                        #     "hostname"
+                    '''
+                }
+            }
+        }
+
+    }
+
+    post {
+
+        success {
+            echo "Credential demonstration completed successfully"
+        }
+
+        failure {
+            echo "Credential demonstration failed"
+        }
+
+        always {
+            echo "Pipeline finished"
+        }
+
+    }
+}
