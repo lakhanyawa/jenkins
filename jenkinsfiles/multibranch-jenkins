@@ -63,6 +63,7 @@ pipeline {
 
         always {
             echo "Pipeline finished"
+            echo "changes from test branch"
         }
     }
 }
