@@ -1,0 +1,21 @@
+pipeline {
+
+    agent any
+
+    environment {
+        GITHUB_CREDS = credentials('github-creds')
+    }
+
+    stages {
+
+        stage('Test') {
+            steps {
+
+                sh '''
+                    echo "GitHub Username: $GITHUB_CREDS_USR"
+                    echo "GitHub credential loaded successfully"
+                '''
+            }
+        }
+    }
+}
